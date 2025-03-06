@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎞️ RM Cineverse - Next-Gen Movie Hub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --hologram-blue: #00f7ff;
+            --cyber-purple: #ff00ff;
+            --matrix-green: #00ff00;
+            --neon-pink: #ff0099;
+        }
+
+        body {
+            background: radial-gradient(circle at center, #000000, #0a0a2e);
+            color: white;
+            min-height: 100vh;
+            font-family: 'Chakra Petch', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .cyber-grid {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            background-image: 
+                linear-gradient(rgba(0, 247, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 247, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            animation: gridScroll 100s linear infinite;
+        }
+
+        @keyframes gridScroll {
+            from { background-position: 0 0; }
+            to { background-position: 1000px 1000px; }
+        }
+
+        .hologram-header {
+            text-shadow: 
+                0 0 15px var(--hologram-blue),
+                0 0 30px var(--cyber-purple);
+            animation: hologramGlitch 2s infinite;
+            position: relative;
+        }
+
+        @keyframes hologramGlitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        .quantum-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 247, 255, 0.3);
+            border-radius: 15px;
+            transition: all 0.5s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quantum-card:hover {
+            transform: scale(1.05) rotate3d(1, 1, 0, 5deg);
+            box-shadow: 0 0 40px rgba(0, 247, 255, 0.3);
+        }
+
+        .quantum-card::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                transparent, 
+                var(--hologram-blue),
+                transparent,
+                var(--cyber-purple),
+                transparent
+            );
+            animation: rotateBorder 4s linear infinite;
+        }
+
+        @keyframes rotateBorder {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .neural-button {
+            background: linear-gradient(45deg,
+                var(--hologram-blue),
+                var(--cyber-purple));
+            border: none;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            clip-path: polygon(15% 0, 100% 0, 85% 100%, 0 100%);
+        }
+
+        .neural-button:hover {
+            filter: hue-rotate(45deg);
+            transform: scale(1.1);
+        }
+
+        .ai-assistant {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 20px;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            backdrop-filter: blur(10px);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 247, 255, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 247, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 247, 255, 0); }
+        }
+
+        /* New Styles */
+        .credit-footer {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0, 247, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+        }
+
+        .request-card {
+            animation: pulseRequest 2s infinite;
+        }
+
+        @keyframes pulseRequest {
+            0% { transform: scale(0.98); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(0.98); }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+    <div class="cyber-grid"></div>
+
+    <!-- Main Content -->
+    <div class="container py-5">
+        <!-- Header -->
+        <div class="text-center mb-5">
+            <h1 class="hologram-header display-1 fw-bold mb-3">
+                <i class="fas fa-infinity"></i> RM Cineverse
+            </h1>
+            <p class="lead">Your Portal to Infinite Entertainment</p>
+        </div>
+
+        <!-- Channels Section -->
+        <div class="row g-4 quantum-row">
+            <div class="col-md-4">
+                <div class="quantum-card p-4 text-center">
+                    <div class="ai-icon mb-3">
+                        <i class="fas fa-brain fa-2x"></i>
+                    </div>
+                    <h3 class="mb-3">AI-Curated Movies</h3>
+                    <button class="neural-button btn text-white w-100">
+                        Explore Now <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="quantum-card p-4">
+                    <h3 class="text-center mb-4">Quantum Channels</h3>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="quantum-card p-3 text-center channel-card">
+                                <i class="fas fa-satellite-dish fa-2x mb-2"></i>
+                                <h5>Main Broadcast</h5>
+                                <a href="https://t.me/RM_Movie_Flix" class="neural-button btn btn-sm">
+                                    Join <i class="fab fa-telegram"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="quantum-card p-3 text-center channel-card">
+                                <i class="fas fa-shield-alt fa-2x mb-2"></i>
+                                <h5>Backup Nexus</h5>
+                                <a href="https://t.me/RM_Movi" class="neural-button btn btn-sm">
+                                    Join <i class="fab fa-telegram"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="quantum-card p-3 text-center channel-card">
+                                <i class="fas fa-rss fa-2x mb-2"></i>
+                                <h5>Update Stream</h5>
+                                <a href="https://t.me/Moviies_Adda" class="neural-button btn btn-sm">
+                                    Join <i class="fab fa-telegram"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="quantum-card p-3 text-center channel-card">
+                                <i class="fas fa-users fa-2x mb-2"></i>
+                                <h5>Community Hub</h5>
+                                <a href="https://t.me/Movies_Rm" class="neural-button btn btn-sm">
+                                    Join <i class="fab fa-telegram"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Request Group Section -->
+        <div class="row mt-5">
+            <div class="col-md-6 mx-auto">
+                <div class="quantum-card p-4 text-center request-card">
+                    <i class="fas fa-comment-dots fa-3x mb-3"></i>
+                    <h3 class="mb-3">Movie Request Group</h3>
+                    <p class="text-muted">Request any movie/series here</p>
+                    <a href="https://t.me/requsetagrp" class="neural-button btn btn-lg w-100">
+                        <i class="fas fa-paper-plane"></i> Join Request Group
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Neural Network Section -->
+        <div class="quantum-card mt-5 p-4">
+            <div class="network-visual">
+                <!-- Add neural network graphics here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Credit Footer -->
+    <div class="credit-footer">
+        <span class="text-white">
+            Created by 
+            <a href="https://t.me/RahatMx" 
+               class="text-decoration-none text-warning">
+               Rahat ★
+            </a>
+        </span>
+    </div>
+
+    <!-- AI Assistant -->
+    <div class="ai-assistant">
+        <i class="fas fa-robot"></i> CineAI: Ready to Assist!
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Particle Network Code
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.velocity = { x: (Math.random() - 0.5), y: (Math.random() - 0.5) };
+                this.radius = Math.random() * 2;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(0, 247, 255, 0.5)';
+                ctx.fill();
+            }
+
+            update() {
+                this.x += this.velocity.x;
+                this.y += this.velocity.y;
+
+                if (this.x < 0 || this.x > canvas.width) this.velocity.x *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.velocity.y *= -1;
+                this.draw();
+            }
+        }
+
+        const particles = Array(100).fill().map(() => new Particle());
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(particle => particle.update());
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
